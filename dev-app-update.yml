@@ -1,0 +1,3 @@
+provider: generic
+url: 'http://localhost/release/electron-vue/'
+updaterCacheDirName: electron-updater

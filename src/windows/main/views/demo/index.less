@@ -1,0 +1,30 @@
+.view-demo{
+  position: relative;
+  &-menu{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 179px;
+    height: 100vh;
+    border-right: solid 1px #eee;
+    .menu-item{
+      display: block;
+      line-height: 24px;
+      padding: 8px 12px;
+      font-size: 14px;
+      border-bottom: solid 1px #eee;
+      font-weight: bold;
+
+      &:hover{
+        color: #333;
+        background-color: #f7f7f8;
+      }
+      &.active{
+        background-color: #eee;
+      }
+    }
+  }
+  &-body{
+    padding: 10px 10px 10px 180px;
+  }
+}
