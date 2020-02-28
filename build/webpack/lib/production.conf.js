@@ -2,7 +2,7 @@ const webpackMerge = require('webpack-merge');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const { entry, resolve, output, rule, plugin, happyPackPlugins, optimization } = require('./const');
+const { entry, resolve, output, rule, plugin, optimization } = require('./const');
 
 const webpackProductionConf = {
   mode: 'production',
@@ -24,7 +24,7 @@ const webpackProductionConf = {
       rule.html,
     ],
   },
-  plugins: happyPackPlugins.concat([
+  plugins: [
     plugin.cleanWebpackPlugin,
     plugin.vueLoaderPlugin,
     plugin.htmlWebpackPlugin.main,
@@ -35,7 +35,7 @@ const webpackProductionConf = {
       chunkFilename: 'assets/css/[name].[chunkhash:12].chunk.css',
       allChunks: true,
     }),
-  ]),
+  ],
   optimization: webpackMerge(optimization, {
     minimizer: [
       new TerserJSPlugin({}),

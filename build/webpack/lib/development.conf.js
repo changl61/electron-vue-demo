@@ -1,5 +1,5 @@
 const webpackMerge = require('webpack-merge');
-const { entry, resolve, output, rule, plugin, happyPackPlugins, optimization } = require('./const');
+const { entry, resolve, output, rule, plugin, optimization } = require('./const');
 
 const webpackDevelopmentConf = {
   mode: 'development',
@@ -21,10 +21,10 @@ const webpackDevelopmentConf = {
       rule.html,
     ],
   },
-  plugins: happyPackPlugins.concat([
+  plugins: [
     plugin.vueLoaderPlugin,
     plugin.htmlWebpackPlugin.main,
-  ]),
+  ],
   optimization: webpackMerge(optimization, {}),
   //devtool: 'source-map',
   stats: 'minimal',

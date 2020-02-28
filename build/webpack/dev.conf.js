@@ -1,21 +1,20 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const webpackDevelopmentConf = require('./lib/development.conf');
+const packageJson = require('../../package.json');
 
 const conf = webpackMerge(webpackDevelopmentConf, {
   optimization: {
     nodeEnv: 'development',
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: packageJson.build.webpack.devServer.contentBase,
     compress: true,
     historyApiFallback: true,
     hot: true,
     clientLogLevel: 'error',
     inline: true,
-    port: 8081,
-    public: 'localhost:8081',
-    host: '0.0.0.0',
+    port: packageJson.build.webpack.devServer.port,
     proxy: {
 
     },

@@ -5,7 +5,6 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const Hash = require("hash-sum");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const HappyPack = require('happypack');
 
 const resolve = dir => path.join(__dirname, dir);
 const postCssLoader = {
@@ -44,7 +43,16 @@ module.exports.rule = {
   js: {
     test: /\.js$/,
     exclude: /node_modules/,
-    use: ['happypack/loader?id=babel'],
+    use: [
+      {
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true, // 缓存，加快编译速度
+          presets: ['@babel/preset-env'],
+          //plugins: ['@babel/plugin-transform-runtime'], // 避免重复引入辅助代码
+        }
+      }
+    ],
   },
   vue: {
     test: /\.vue$/,
@@ -130,23 +138,6 @@ module.exports.plugin = {
   }),
   vueLoaderPlugin: new VueLoaderPlugin(),
 };
-
-module.exports.happyPackPlugins = [
-  new HappyPack({
-    id: 'babel',
-    threads: 4,
-    loaders: [
-      {
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: true, // 缓存，加快编译速度
-          presets: ['@babel/preset-env'],
-          //plugins: ['@babel/plugin-transform-runtime'], // 避免重复引入辅助代码
-        }
-      }
-    ],
-  }),
-];
 
 module.exports.optimization = {
   splitChunks: {

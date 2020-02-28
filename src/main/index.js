@@ -1,10 +1,6 @@
-/**
- * 主进程
- * 1. 控制应用的生命周期
- * 2. 管理渲染进程
- */
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+const packageJson = require('../../package.json');
 const config = require('../config');
 const { listenForUpdate } = require('./updater');
 
@@ -24,7 +20,8 @@ function createMainWindow () {
 
   // 主窗口 - 渲染
   if (config.env === 'dev') {
-    window.loadURL('http://localhost:8081/main.html');
+    let port = packageJson.build.webpack.devServer.port;
+    window.loadURL(`http://localhost:${port}/main.html`);
     window.webContents.openDevTools(); // 调试工具
   } else {
     window.loadFile('dist/webpack/main.html');
